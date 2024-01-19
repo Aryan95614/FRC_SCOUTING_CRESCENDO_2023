@@ -6,7 +6,7 @@ import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
-
+import 'scoutingapp1/pages/sample.dart';
 class Dataclass {
   Dataclass() {
     resetDataclass();
@@ -22,5 +22,16 @@ class functions {
   // Initialize new Dataclass
   static Dataclass dataclass = Dataclass();
 
-  // Make A QRcode
+  @pragma('vm:entry-point')
+  static Route<void> _myRouteBuilder(BuildContext context, Object? arguments) {
+    return MaterialPageRoute<void>(
+      builder: (BuildContext context) => const RestorablePushExample(),
+    );
+  }
+
+
+  void showPage(String PageName, BuildContext context){
+    Navigator.restorablePush(context, (conte);
+    
+  }
 }
