@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scoutingapp1/components/functions.dart';
+import './components/functions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => showPage("mainPage", context),
                   child: const Text("Start Scouting"),
                 )
               ],
