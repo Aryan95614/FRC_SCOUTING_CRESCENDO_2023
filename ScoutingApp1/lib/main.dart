@@ -45,10 +45,10 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                ElevatedButton(
+                FloatingActionButton.extended(
                   onPressed: () => showPage("mainPage", context),
-                  child: const Text("Start Scouting"),
-                )
+                  label: const Text("Start Scouting"),
+                ),
               ],
             ),
           ),
