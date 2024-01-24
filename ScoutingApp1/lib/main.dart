@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './components/functions.dart';
+import './pages/Auto.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,11 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'FRC 4976 Scouting App'),
-      routes: {},
+      routes: {
+        "AutoPage": (context) => AutoPage(
+              title: "Autonoumous Period",
+            ),
+      },
     );
   }
 }
@@ -46,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 FloatingActionButton.extended(
-                  onPressed: () => showPage("mainPage", context),
+                  onPressed: () => showPage("AutoPage", context),
                   label: const Text("Start Scouting"),
                 ),
               ],
