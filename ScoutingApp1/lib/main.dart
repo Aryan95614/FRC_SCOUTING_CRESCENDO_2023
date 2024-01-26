@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './components/functions.dart';
 import './pages/Auto.dart';
+import './pages/EndGame.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,9 +21,10 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(title: 'FRC 4976 Scouting App'),
       routes: {
-        "AutoPage": (context) => AutoPage(
+        "AutoPage": (context) => const AutoPage(
               title: "Autonoumous Period",
             ),
+        "EndGamePage": (context) => const EndGame(title: "EndGame Period"),
       },
     );
   }
@@ -53,6 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 FloatingActionButton.extended(
                   onPressed: () => showPage("AutoPage", context),
                   label: const Text("Start Scouting"),
+                ),
+                Functions.verticalSpacing(),
+                FloatingActionButton.extended(
+                  onPressed: () => showPage("EndGamePage", context),
+                  label: const Text("End Scouting"),
                 ),
               ],
             ),
