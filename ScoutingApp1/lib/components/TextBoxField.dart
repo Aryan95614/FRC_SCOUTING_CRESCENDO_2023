@@ -34,8 +34,6 @@ class _TextBoxField extends State<textBoxField> {
             ),
             onChanged: (String? changedText) {
               Functions.dataclass.data[widget.value] = changedText!;
-              print(
-                  "Changed to ${Functions.dataclass.data[widget.value].toString()}");
             },
           ),
         ),

@@ -14,12 +14,17 @@ class EndGame extends StatefulWidget {
 }
 
 class _EndGameState extends State<EndGame> {
-  checkbox climbed = new checkbox(value: "climb", description: "Climbed?: ");
-  AddOrMinus trap =
-      new AddOrMinus(value: "trap", description: "Traps Scored: ");
+  checkbox climbed = checkbox(value: "climb", description: "Climbed?: ");
+  AddOrMinus trap = AddOrMinus(value: "trap", description: "Traps Scored: ");
 
   checkbox chainFalling =
-      new checkbox(value: "ChainFalling", description: "Fallen? ");
+      checkbox(value: "ChainFalling", description: "Fallen? ");
+
+  checkbox harmonizeTwo = checkbox(
+      value: "Harmonizing_Two_Robots", description: "Harmonize two Robots?: ");
+  checkbox harmonizeThree = checkbox(
+      value: "Harmonizing_Three_Robots",
+      description: "Harmonize three Robots?: ");
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +49,17 @@ class _EndGameState extends State<EndGame> {
               // Has the robot moved ( CheckBox )
               chainFalling,
               Functions.verticalSpacing(),
+
+              // harmonize two bullets
+              harmonizeTwo,
+              Functions.verticalSpacing(),
+
+              // harmonize three
+              harmonizeThree,
+              Functions.verticalSpacing(),
+
+              // Page Navigation
+              backAndForthPages(context, 5),
             ],
           ),
         ),

@@ -14,12 +14,18 @@ class AutoPage extends StatefulWidget {
 }
 
 class _AutoPageState extends State<AutoPage> {
-  AddOrMinus speakerNoteCollection = new AddOrMinus(
-      value: "speaker_note_score", description: "Speaker Shots?: ");
+  AddOrMinus speakerNoteCollection =
+      AddOrMinus(value: "speaker_note_score", description: "Speaker Shots?: ");
+  AddOrMinus speakerNoteMissingCollection = AddOrMinus(
+      value: "speaker_note_auto_missed", description: "Speaker Misses?: ");
+
   AddOrMinus ampNoteCollection =
-      new AddOrMinus(value: "amp_note_score", description: "Amp Shots?: ");
-  checkbox moved = new checkbox(
-      value: "moved_during_auto", description: "Moved During Auto?: ");
+      AddOrMinus(value: "amp_note_score", description: "Amp Shots?: ");
+  AddOrMinus ampNoteMissingCollection =
+      AddOrMinus(value: "amp_note_auto_missed", description: "Amp Misses?: ");
+
+  checkbox moved =
+      checkbox(value: "moved_during_auto", description: "Moved During Auto?: ");
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +43,24 @@ class _AutoPageState extends State<AutoPage> {
               speakerNoteCollection,
               Functions.verticalSpacing(),
 
+              // Speaker Note Missing ( + - )
+              speakerNoteMissingCollection,
+              Functions.verticalSpacing(),
+
               // Amp Note Score ( + - )
               ampNoteCollection,
+              Functions.verticalSpacing(),
+
+              // amp Note Missing ( + - )
+              ampNoteMissingCollection,
               Functions.verticalSpacing(),
 
               // Has the robot moved ( CheckBox )
               moved,
               Functions.verticalSpacing(),
+
+              // Page Navigation
+              backAndForthPages(context, 3),
             ],
           ),
         ),

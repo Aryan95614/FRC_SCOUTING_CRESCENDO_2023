@@ -15,9 +15,16 @@ class Pregame extends StatefulWidget {
 }
 
 class _PregameState extends State<Pregame> {
+  final PageStorageBucket _bucket = PageStorageBucket();
+
   textBoxField personName =
-      new textBoxField(value: "person_name", description: "Your name?");
-  checkbox isRed = new checkbox(value: "color", description: "Team red?");
+      textBoxField(value: "person_name", description: "Your name?");
+  textBoxField teamNumber =
+      textBoxField(value: "team_name", description: "Team #?");
+  textBoxField matchNumber =
+      textBoxField(value: "match_number", description: "Match #?");
+
+  checkbox isRed = checkbox(value: "color", description: "Team red?");
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +32,30 @@ class _PregameState extends State<Pregame> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: SingleChildScrollView(
-        dragStartBehavior: DragStartBehavior.start,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              personName,
-              Functions.verticalSpacing(),
-              isRed,
-            ],
+      body: PageStorage(
+        bucket: _bucket,
+        child: SingleChildScrollView(
+          dragStartBehavior: DragStartBehavior.start,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                personName,
+                Functions.verticalSpacing(),
+
+                teamNumber,
+                Functions.verticalSpacing(),
+
+                matchNumber,
+                Functions.verticalSpacing(),
+
+                isRed,
+                Functions.verticalSpacing(),
+
+                // Page Navigation
+                backAndForthPages(context, 2),
+              ],
+            ),
           ),
         ),
       ),
