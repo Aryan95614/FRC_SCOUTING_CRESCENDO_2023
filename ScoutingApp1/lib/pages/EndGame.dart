@@ -14,11 +14,12 @@ class EndGame extends StatefulWidget {
 }
 
 class _EndGameState extends State<EndGame> {
-  checkbox climbed = checkbox(value: "climb", description: "Climbed?: ");
-  AddOrMinus trap = AddOrMinus(value: "trap", description: "Traps Scored: ");
+  checkbox climbed = new checkbox(value: "climb", description: "Climbed?: ");
+  AddOrMinus trap =
+      new AddOrMinus(value: "trap", description: "Traps Scored: ");
 
   checkbox chainFalling =
-      checkbox(value: "ChainFalling", description: "Fallen? ");
+      new checkbox(value: "ChainFalling", description: "Fallen? ");
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './components/functions.dart';
+import './pages/Pregame.dart';
 import './pages/Auto.dart';
 import './pages/EndGame.dart';
 
@@ -21,8 +22,9 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(title: 'FRC 4976 Scouting App'),
       routes: {
+        "PreGamePage": (context) => const Pregame(title: 'Before the Game'),
         "AutoPage": (context) => const AutoPage(
-              title: "Autonoumous Period",
+              title: "Autonomous Period",
             ),
         "EndGamePage": (context) => const EndGame(title: "EndGame Period"),
       },
@@ -53,14 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 FloatingActionButton.extended(
-                  onPressed: () => showPage("AutoPage", context),
+                  heroTag: 'Go to the Auto Page',
+                  onPressed: () => showPage("PreGamePage", context),
                   label: const Text("Start Scouting"),
                 ),
                 Functions.verticalSpacing(),
-                FloatingActionButton.extended(
-                  onPressed: () => showPage("EndGamePage", context),
-                  label: const Text("End Scouting"),
-                ),
               ],
             ),
           ),

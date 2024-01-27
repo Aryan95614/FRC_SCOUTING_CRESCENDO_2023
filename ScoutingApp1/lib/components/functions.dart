@@ -10,8 +10,13 @@ import '../pages/sample.dart';
 
 class Dataclass {
   Map<String, dynamic> data = {
+    "person_name": "",
     "team_name": "",
     "match_number": 0,
+
+    // Pregame
+
+    "color": false,
 
     // Auto
 

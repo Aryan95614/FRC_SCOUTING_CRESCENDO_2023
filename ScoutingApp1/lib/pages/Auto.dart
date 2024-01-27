@@ -14,12 +14,12 @@ class AutoPage extends StatefulWidget {
 }
 
 class _AutoPageState extends State<AutoPage> {
-  AddOrMinus speakerNoteCollection =
-      AddOrMinus(value: "speaker_note_score", description: "Speaker Shots?: ");
+  AddOrMinus speakerNoteCollection = new AddOrMinus(
+      value: "speaker_note_score", description: "Speaker Shots?: ");
   AddOrMinus ampNoteCollection =
-      AddOrMinus(value: "amp_note_score", description: "Amp Shots?: ");
-  checkbox moved =
-      checkbox(value: "moved_during_auto", description: "Moved During Auto?: ");
+      new AddOrMinus(value: "amp_note_score", description: "Amp Shots?: ");
+  checkbox moved = new checkbox(
+      value: "moved_during_auto", description: "Moved During Auto?: ");
 
   @override
   Widget build(BuildContext context) {

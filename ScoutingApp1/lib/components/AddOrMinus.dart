@@ -24,17 +24,19 @@ class _AddOrMinusState extends State<AddOrMinus> {
       children: [
         Text("${widget.description} "),
         Functions.widthSpacing(),
-        FloatingActionButton.small(
-            onPressed: () {
-              setState(() {
-                if (Functions.dataclass.data[widget.value] > 0) {
-                  Functions.dataclass.data[widget.value] -= 1;
-                }
-              });
-            },
-            child: const Text(
-              "-",
-            )),
+        Container(
+          child: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  if (Functions.dataclass.data[widget.value] > 0) {
+                    Functions.dataclass.data[widget.value] -= 1;
+                  }
+                });
+              },
+              child: const Text(
+                "-",
+              )),
+        ),
 
         // Adding some space
         Functions.widthSpacing(),
@@ -45,17 +47,19 @@ class _AddOrMinusState extends State<AddOrMinus> {
         // Adding some space
         Functions.widthSpacing(),
 
-        FloatingActionButton.small(
-            onPressed: () {
-              setState(() {
-                if (Functions.dataclass.data[widget.value] < 50) {
-                  Functions.dataclass.data[widget.value] += 1;
-                }
-              });
-            },
-            child: const Text(
-              "+",
-            )),
+        Container(
+          child: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  if (Functions.dataclass.data[widget.value] < 50) {
+                    Functions.dataclass.data[widget.value] += 1;
+                  }
+                });
+              },
+              child: const Text(
+                "+",
+              )),
+        ),
       ],
     );
   }
