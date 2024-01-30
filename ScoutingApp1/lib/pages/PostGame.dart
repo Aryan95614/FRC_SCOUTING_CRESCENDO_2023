@@ -32,7 +32,7 @@ class _PostGamePageState extends State<PostGamePage> {
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              Pregame(title: "Pregame Page")),
+                              const Pregame(title: "Pregame Page")),
                       ModalRoute.withName('/'));
                 },
                 label: const Text("Redo Scouting")),

@@ -66,11 +66,13 @@ class Functions {
         height: Dataclass.verticalSeparation,
       );
 
-  static String returnTotalDataclass() {
+  static String returnTotalDataclass(String widgetInformation) {
+    String totalString = "";
+
     // We get started with a new dataclass
     dataclass = Dataclass();
 
-    return "";
+    return totalString;
   }
 }
 
@@ -79,7 +81,7 @@ void showPage(String pageName, BuildContext context) {
 }
 
 Row backAndForthPages(BuildContext context, int route) {
-  Map<int, String> possible_routes = {
+  Map<int, String> possibleRoutes = {
     1: "MainPage",
     2: "PreGamePage",
     3: "AutoPage",
@@ -93,14 +95,13 @@ Row backAndForthPages(BuildContext context, int route) {
     children: [
       IconButton(
           onPressed: () {
-            Navigator.popAndPushNamed(context, possible_routes[route - 1]!);
+            Navigator.popAndPushNamed(context, possibleRoutes[route - 1]!);
           },
           icon: const Icon(Icons.arrow_back_outlined)),
       Functions.widthSpacing(),
       IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(
-                context, possible_routes[route + 1]!);
+            Navigator.pushReplacementNamed(context, possibleRoutes[route + 1]!);
           },
           icon: const Icon(Icons.arrow_forward_outlined))
     ],

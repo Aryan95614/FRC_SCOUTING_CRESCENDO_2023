@@ -20,9 +20,9 @@ class _PregameState extends State<Pregame> {
   textBoxField personName =
       textBoxField(value: "person_name", description: "Your name?");
   textBoxField teamNumber =
-      textBoxField(value: "team_name", description: "Team #?");
+      textBoxField(value: "team_name", description: "Team #?     ");
   textBoxField matchNumber =
-      textBoxField(value: "match_number", description: "Match #?");
+      textBoxField(value: "match_number", description: "Match #?    ");
 
   checkbox isRed = checkbox(value: "color", description: "Team red?");
 
