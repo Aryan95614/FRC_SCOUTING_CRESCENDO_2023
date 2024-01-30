@@ -47,7 +47,7 @@ class Dataclass {
   };
 
   static const double widthSeparation = 5.0;
-  static const double verticalSeparation = 5.0;
+  static const double verticalSeparation = 20.0;
 
   void resetDataclass() {}
 }
@@ -63,8 +63,15 @@ class Functions {
       );
 
   static SizedBox verticalSpacing() => const SizedBox(
-        height: 20,
+        height: Dataclass.verticalSeparation,
       );
+
+  static String returnTotalDataclass() {
+    // We get started with a new dataclass
+    dataclass = Dataclass();
+
+    return "";
+  }
 }
 
 void showPage(String pageName, BuildContext context) {
