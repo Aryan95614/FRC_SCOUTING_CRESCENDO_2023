@@ -22,10 +22,9 @@ class _TextBoxField extends State<textBoxField> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("${widget.description} "),
+        Expanded(child: Text(" ${widget.description} ")),
         Functions.widthSpacing(),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * .75,
+        Expanded(
           child: TextField(
             obscureText: false,
             decoration: InputDecoration(

@@ -22,7 +22,7 @@ class _AddOrMinusState extends State<AddOrMinus> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("${widget.description} "),
+        SizedBox(width: 150, child: Text("${widget.description} ")),
         Functions.widthSpacing(),
         Container(
           child: ElevatedButton(

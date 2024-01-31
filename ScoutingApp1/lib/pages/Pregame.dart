@@ -20,45 +20,39 @@ class _PregameState extends State<Pregame> {
   textBoxField personName =
       textBoxField(value: "person_name", description: "Your name?");
   textBoxField teamNumber =
-      textBoxField(value: "team_name", description: "Team #?     ");
+      textBoxField(value: "team_name", description: "Team #?:");
   textBoxField matchNumber =
-      textBoxField(value: "match_number", description: "Match #?    ");
+      textBoxField(value: "match_number", description: "Match #?:");
 
   checkbox isRed = checkbox(value: "color", description: "Team red?");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: PageStorage(
-        bucket: _bucket,
-        child: SingleChildScrollView(
-          dragStartBehavior: DragStartBehavior.start,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                personName,
-                Functions.verticalSpacing(),
-
-                teamNumber,
-                Functions.verticalSpacing(),
-
-                matchNumber,
-                Functions.verticalSpacing(),
-
-                isRed,
-                Functions.verticalSpacing(),
-
-                // Page Navigation
-                backAndForthPages(context, 2),
-              ],
-            ),
-          ),
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+          dragStartBehavior: DragStartBehavior.start,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              personName,
+              Functions.verticalSpacing(),
+
+              teamNumber,
+              Functions.verticalSpacing(),
+
+              matchNumber,
+              Functions.verticalSpacing(),
+
+              isRed,
+              Functions.verticalSpacing(),
+
+              // Page Navigation
+              backAndForthPages(context, 2),
+            ],
+          ),
+        ));
   }
 }

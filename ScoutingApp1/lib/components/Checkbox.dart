@@ -22,7 +22,7 @@ class _checkbox extends State<checkbox> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("${widget.description} "),
+        SizedBox(width: 150, child: Text("${widget.description} ")),
         Functions.widthSpacing(),
         Checkbox(
             value: Functions.dataclass.data[widget.value],
