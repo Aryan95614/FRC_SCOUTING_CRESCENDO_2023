@@ -44,6 +44,7 @@ class Dataclass {
     "ChainFalling": false,
     "Harmonizing_Two_Robots": false,
     "Harmonizing_Three_Robots": false,
+    "notes": "",
   };
 
   static const double widthSeparation = 5.0;

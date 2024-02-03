@@ -69,6 +69,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   label: const Text("Start Scouting"),
                 ),
                 Functions.verticalSpacing(),
+                FloatingActionButton.extended(
+                    heroTag: 'Scan the QRCode',
+                    onPressed: () {},
+                    label: const Text("Scan QR Code"))
               ],
             ),
           ),

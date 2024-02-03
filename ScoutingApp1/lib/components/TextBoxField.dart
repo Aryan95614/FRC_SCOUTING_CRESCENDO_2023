@@ -22,9 +22,13 @@ class _TextBoxField extends State<textBoxField> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(child: Text(" ${widget.description} ")),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * .20,
+          child: Text(" ${widget.description} "),
+        ),
         Functions.widthSpacing(),
-        Expanded(
+        SizedBox(
+          width: MediaQuery.of(context).size.width * .70,
           child: TextField(
             obscureText: false,
             decoration: InputDecoration(
@@ -35,7 +39,7 @@ class _TextBoxField extends State<textBoxField> {
               Functions.dataclass.data[widget.value] = changedText!;
             },
           ),
-        ),
+        )
       ],
     );
   }

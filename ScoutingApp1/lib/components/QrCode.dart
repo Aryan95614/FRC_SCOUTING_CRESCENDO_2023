@@ -29,13 +29,14 @@ class _QRCodeWidgetState extends State<QRCodeWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
+            FloatingActionButton.extended(
+                heroTag: "Showing QRCode",
                 onPressed: () {
                   setState(() {
                     _isVisible = true;
                   });
                 },
-                child: const Text("Show QRCode")),
+                label: const Text("Show QRCode")),
             Visibility(
                 visible: _isVisible,
                 child: Screenshot(

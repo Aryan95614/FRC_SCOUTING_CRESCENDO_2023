@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoutingapp1/components/QrCode.dart';
 import './Pregame.dart';
 import 'package:scoutingapp1/components/AddOrMinus.dart';
 import 'package:scoutingapp1/components/functions.dart';
@@ -37,12 +38,7 @@ class _PostGamePageState extends State<PostGamePage> {
                 },
                 label: const Text("Redo Scouting")),
             Functions.verticalSpacing(),
-            FloatingActionButton.extended(
-                heroTag: 'Going to Scanner Page',
-                onPressed: () {
-                  String data = "";
-                },
-                label: const Text("Make QR Code")),
+            const QRCodeWidget(information: "kemkemrk"),
           ],
         ),
       )),

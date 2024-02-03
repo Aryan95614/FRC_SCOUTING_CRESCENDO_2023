@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:scoutingapp1/components/AddOrMinus.dart';
+import 'package:scoutingapp1/components/TextBoxField.dart';
 import 'package:scoutingapp1/components/functions.dart';
 import 'package:scoutingapp1/components/Checkbox.dart';
 
@@ -25,6 +26,9 @@ class _EndGameState extends State<EndGame> {
   checkbox harmonizeThree = checkbox(
       value: "Harmonizing_Three_Robots",
       description: "Harmonize three Robots?: ");
+
+  textBoxField notes = textBoxField(
+      value: 'notes', description: "Information about the Robot: ");
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +60,10 @@ class _EndGameState extends State<EndGame> {
 
               // harmonize three
               harmonizeThree,
+              Functions.verticalSpacing(),
+
+              // notes on the robot
+              notes,
               Functions.verticalSpacing(),
 
               // Page Navigation
