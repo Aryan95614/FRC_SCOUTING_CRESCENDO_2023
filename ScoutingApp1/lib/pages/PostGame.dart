@@ -14,39 +14,19 @@ class PostGamePage extends StatefulWidget {
   State<PostGamePage> createState() => _PostGamePageState();
 }
 
-class _PostGamePageState extends State<PostGamePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: SingleChildScrollView(
-          child: Center(
-        child: Column(
-          children: [
-            FloatingActionButton.extended(
-                heroTag: 'Going to Starting page',
-                onPressed: () {
-                  // This is yet to be confirmed to work
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const Pregame(title: "Pregame Page")),
-                      ModalRoute.withName('/'));
-                },
-                label: const Text("Redo Scouting")),
-            Functions.verticalSpacing(),
-            const QRCodeWidget(information: "kemkemrk"),
-          ],
-        ),
-      )),
-    );
-  }
-}
+//                     setState(() {
 
-// import 'package:flutter/material.dart';
+// }
+//   }
+//     );
+//           )),
+//             ),
+//               ],
+//                 )
+//                   child: const Text("Share"),
+//                   },
+//                     });
+//
 // import 'package:frc_2023_charged_up_scouting/Data.dart';
 // import 'package:frc_2023_charged_up_scouting/Functions.dart';
 // import 'package:qr_flutter/qr_flutter.dart';
@@ -144,15 +124,35 @@ class _PostGamePageState extends State<PostGamePage> {
 //                           .path;
 //                       appDocDirs = '$appDocDirs/qr.png';
 //                     }
-//                     setState(() {
-//
-//                     });
-//                   },
-//                   child: const Text("Share"),
-//                 )
-//               ],
-//             ),
-//           )),
-//     );
-//   }
-// }
+class _PostGamePageState extends State<PostGamePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: SingleChildScrollView(
+          child: Center(
+        child: Column(
+          children: [
+            FloatingActionButton.extended(
+                heroTag: 'Going to Starting page',
+                onPressed: () {
+                  // This is yet to be confirmed to work
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const Pregame(title: "Pregame Page")),
+                      ModalRoute.withName('/'));
+                },
+                label: const Text("Redo Scouting")),
+            Functions.verticalSpacing(),
+            const QRCodeWidget(information: ""),
+          ],
+        ),
+      )),
+    );
+  }
+}
+// import 'package:flutter/material.dart';

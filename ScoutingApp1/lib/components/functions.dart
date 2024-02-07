@@ -49,13 +49,53 @@ class Dataclass {
 
   static const double widthSeparation = 5.0;
   static const double verticalSeparation = 20.0;
+  String totalString = "";
 
-  void resetDataclass() {}
+  void resetDataclass() {
+    data = {
+      // Pregame
+      "person_name": "",
+      "team_name": "",
+      "match_number": "",
+      "color": false,
+
+      // Auto
+
+      "speaker_note_score": 0,
+      "amp_note_score": 0,
+      "speaker_note_auto_missed": 0,
+      "amp_note_auto_missed": 0,
+
+      "moved_during_auto": false,
+
+      // Teleop
+
+      "speaker_note_teleop": 0,
+      "amp_note_teleop": 0,
+      "speaker_note_missed": 0,
+      "amp_note_missed": 0,
+
+      "coop": false,
+
+      "recouver": 0,
+      "broken": 0,
+
+      // EndGame
+
+      "climb": false,
+      "trap": 0,
+      "ChainFalling": false,
+      "Harmonizing_Two_Robots": false,
+      "Harmonizing_Three_Robots": false,
+      "notes": "",
+    };
+  }
 }
 
 class Functions {
   // Initialize new Dataclass
   static Dataclass dataclass = Dataclass();
+  static String totalString = "";
 
   void restartDataclass() => dataclass.resetDataclass();
 
@@ -67,11 +107,50 @@ class Functions {
         height: Dataclass.verticalSeparation,
       );
 
-  static String returnTotalDataclass(String widgetInformation) {
-    String totalString = "";
+  static void addToTotalString(List<String> variables) {
+    for (String variable in variables) {
+      totalString = "${totalString + dataclass.data[variable].toString()}, ";
+    }
+  }
 
-    // We get started with a new dataclass
-    dataclass = Dataclass();
+  static String returnTotalDataclass() {
+    // Team Name
+    addToTotalString(<String>[
+      // Pregame
+      "team_name",
+      "match_number",
+      "color",
+
+      // Auto
+      "moved_during_auto",
+      "speaker_note_score",
+      "speaker_note_auto_missed",
+      "amp_note_score",
+      "amp_note_auto_missed",
+
+      // Teleop
+      "speaker_note_teleop",
+      "speaker_note_missed",
+      "amp_note_teleop",
+      "amp_note_missed",
+      /* TODO: Add a times amped */
+      "coop",
+      "broken",
+      "recouver",
+
+      /* TODO: The timer or T should be counted idk */
+
+      // Endgame
+      "climb",
+      "ChainFalling",
+      "trap",
+      /* TODO: add a trap miss? */
+      // SAM WHERE DO WE ADD HARMONIZE AND NAMES
+    ]);
+
+    totalString = "$totalString\n";
+
+    dataclass.resetDataclass();
 
     return totalString;
   }

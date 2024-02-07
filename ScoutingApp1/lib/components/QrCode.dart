@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 import './functions.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:async';
-import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 class QRCodeWidget extends StatefulWidget {
   const QRCodeWidget({Key? key, required this.information}) : super(key: key);
@@ -21,6 +20,34 @@ class QRCodeWidget extends StatefulWidget {
 
 class _QRCodeWidgetState extends State<QRCodeWidget> {
   bool _isVisible = false;
+  ScreenshotController _screenshotController = ScreenshotController();
+  var image;
+
+  Future<void> _captureAndSaveQRCode() async {
+    var appDocDir = (await getApplicationDocumentsDirectory()).path;
+    final imagePath = await File('$appDocDir/captured.png').create();
+
+    _screenshotController
+        .captureFromWidget(
+            Container(
+              color: Colors.white,
+              child: QrImageView(
+                data: Functions.returnTotalDataclass(),
+                version: QrVersions.auto,
+                size: 200,
+                gapless: false,
+              ),
+            ),
+            delay: const Duration(seconds: 1))
+        .then((value) async {
+      image = value;
+
+      await imagePath.writeAsBytes(image!);
+
+      ///Share
+      await Share.shareFiles([imagePath.path]);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +66,24 @@ class _QRCodeWidgetState extends State<QRCodeWidget> {
                 label: const Text("Show QRCode")),
             Visibility(
                 visible: _isVisible,
-                child: Screenshot(
-                  controller: ScreenshotController(),
-                  child: QrImageView(
-                    data: Functions.returnTotalDataclass(widget.information),
-                    version: QrVersions.auto,
-                    size: 200,
-                    gapless: false,
-                  ),
-                )),
+                child: Column(
+                  children: [
+                    Screenshot(
+                      controller: _screenshotController,
+                      child: QrImageView(
+                        data: Functions.returnTotalDataclass(),
+                        version: QrVersions.auto,
+                        size: 200,
+                        gapless: false,
+                      ),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          _captureAndSaveQRCode();
+                        },
+                        child: const Text("Share Code"))
+                  ],
+                ))
           ],
         ),
       ),
