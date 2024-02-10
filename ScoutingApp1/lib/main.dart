@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import './components/functions.dart';
+import 'package:scoutingapp1/pages/ResultsPage.dart';
+import 'package:scoutingapp1/pages/Teleop.dart';
+import 'pages/Pregame.dart';
+import 'pages/PostGame.dart';
+import 'pages/Auto.dart';
+import 'pages/EndGame.dart';
+import 'QR Scanner/QRScanner.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +24,16 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'FRC 4976 Scouting App'),
-      routes: {},
+      routes: {
+        '/Pregame': (context) => const PregamePage(title: 'Pregame'),
+        '/Auto': (context) => const AutoGamePage(title: 'Auto'),
+        "/Teleop": (context) => const TelePage(title: "Teleop"),
+        "/PostGame": (context) => const PostPage(title: "PostGame"),
+        "/EndGame": (context) => const EndGamePage(title: "EndGame"),
+        '/ResultsPage': (context) => const ResultsPage(title: 'ResultsPage'),
+        '/MyHomePage': (context) => const MyHomePage(title: 'MyHomePage'),
+        '/QRScannerPage': (context) => const ScannerPage(title: 'ScannerPage')
+      },
     );
   }
 }
@@ -45,9 +60,21 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                FloatingActionButton.extended(
-                  onPressed: () => showPage("mainPage", context),
-                  label: const Text("Start Scouting"),
+                SizedBox(height: 100,),
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/Pregame');
+
+                  },
+                  child: const Text("Start Scouting"),
+                ),
+                SizedBox(height: 15,),
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/QRScannerPage');
+
+                  },
+                  child: const Text("QR Scanner"),
                 ),
               ],
             ),
