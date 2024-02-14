@@ -40,7 +40,7 @@ class Dataclass {
     // EndGame
 
     "climb": false,
-    "trap": 0,
+    "trap": false,
     "ChainFalling": false,
     "Harmonizing_Two_Robots": false,
     "Harmonizing_Three_Robots": false,
@@ -83,7 +83,7 @@ class Dataclass {
       // EndGame
 
       "climb": false,
-      "trap": 0,
+      "trap": false,
       "ChainFalling": false,
       "Harmonizing_Two_Robots": false,
       "Harmonizing_Three_Robots": false,
@@ -109,6 +109,9 @@ class Functions {
 
   static void addToTotalString(List<String> variables) {
     for (String variable in variables) {
+      if (dataclass.data[variable] == "") {
+        dataclass.data[variable] = "0";
+      }
       totalString = "${totalString + dataclass.data[variable].toString()}, ";
     }
   }
@@ -133,12 +136,10 @@ class Functions {
       "speaker_note_missed",
       "amp_note_teleop",
       "amp_note_missed",
-      /* TODO: Add a times amped */
+
       "coop",
       "broken",
       "recouver",
-
-      /* TODO: The timer or T should be counted idk */
 
       // Endgame
       "climb",
@@ -181,7 +182,7 @@ Row backAndForthPages(BuildContext context, int route) {
       Functions.widthSpacing(),
       IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, possibleRoutes[route + 1]!);
+            Navigator.pushNamed(context, possibleRoutes[route + 1]!);
           },
           icon: const Icon(Icons.arrow_forward_outlined))
     ],

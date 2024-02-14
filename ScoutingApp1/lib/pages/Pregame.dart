@@ -25,7 +25,6 @@ class _PregameState extends State<Pregame> {
       textBoxField(value: "match_number", description: "Match #?:");
 
   checkbox isRed = checkbox(value: "color", description: "Team red?");
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +45,34 @@ class _PregameState extends State<Pregame> {
               matchNumber,
               Functions.verticalSpacing(),
 
-              isRed,
+              const Text("Team Color: \t"),
+              Functions.verticalSpacing(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Functions.widthSpacing(),
+                  const Text("Red: "),
+                  Checkbox(
+                      value: Functions.dataclass.data["color"],
+                      activeColor: Colors.red,
+                      onChanged: (bool? moved) {
+                        setState(() {
+                          Functions.dataclass.data["color"] = moved;
+                          print(Functions.dataclass.data["color"] = moved);
+                        });
+                      }),
+                  const Text("Blue: "),
+                  Checkbox(
+                      value: !Functions.dataclass.data["color"],
+                      activeColor: Colors.blue,
+                      onChanged: (bool? moved) {
+                        setState(() {
+                          Functions.dataclass.data["color"] = !moved!;
+                        });
+                      }),
+                ],
+              ),
+
               Functions.verticalSpacing(),
 
               // Page Navigation
