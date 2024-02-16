@@ -34,6 +34,7 @@ dependencies:
   share_plus:
   screenshot:
   qr_flutter:
+  qr_code_scanner:
   
 
   # The following adds the Cupertino Icons font to your application.

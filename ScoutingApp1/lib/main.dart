@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:scoutingapp1/QRCodeScanner/ScanningPage.dart';
 import './components/functions.dart';
 import './pages/Pregame.dart';
 import './pages/Auto.dart';
 import './pages/EndGame.dart';
 import './pages/Teleop.dart';
 import './pages/PostGame.dart';
+import './QRCodeScanner/ScanningNavigationPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,6 +37,8 @@ class MyApp extends StatelessWidget {
         "EndGamePage": (context) => const EndGame(title: "EndGame Period"),
         "PostGamePage": (context) =>
             const PostGamePage(title: "PostGame Period"),
+        "/Scanner1": (context) => const ScanningPage(title: "Scan Page"),
+        "/ScanNav": (context) => const scanPage(title: "Scan Page")
       },
     );
   }
@@ -71,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Functions.verticalSpacing(),
                 FloatingActionButton.extended(
                     heroTag: 'Scan the QRCode',
-                    onPressed: () {},
+                    onPressed: () => showPage("/ScanNav", context),
                     label: const Text("Scan QR Code"))
               ],
             ),

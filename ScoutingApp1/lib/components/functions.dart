@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/rendering.dart';
@@ -10,6 +12,7 @@ import '../pages/sample.dart';
 
 class Dataclass {
   bool showQRCode = false;
+
   Map<String, dynamic> data = {
     // Pregame
     "person_name": "",
@@ -108,7 +111,12 @@ class Functions {
   static Dataclass dataclass = Dataclass();
   static String totalString = "";
 
+  static Set<String> queue = {};
+
   //bool showQRCode = false;
+  static void addToImageSet(String data) {
+    Functions.queue.add(data);
+  }
 
   void restartDataclass() => dataclass.resetDataclass();
 
@@ -175,18 +183,14 @@ class Functions {
     totalString = "$totalString${harmonize.toString()}, ";
 
     // add fouls points to other team
-    totalString =
-        totalString + Functions.dataclass.data["fouls"].toString() + ", ";
-    // add harmonize harmonize (0:0, 1:1, 2:2)
-    totalString =
-        totalString + Functions.dataclass.data["cards"].toString() + ", ";
+    addToTotalString(["fouls", "cards", "notes", "person_name"]);
 
-    totalString = "$totalString\n";
-
+    totalString += "~";
     String returnString = totalString;
     //dataclass.resetDataclass();
     totalString = "";
 
+    print(returnString);
     return returnString;
   }
 }
