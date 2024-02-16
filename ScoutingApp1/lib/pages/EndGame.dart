@@ -18,6 +18,13 @@ class _EndGameState extends State<EndGame> {
   checkbox climbed = checkbox(value: "climb", description: "Climbed?: ");
   checkbox trap = checkbox(value: "trap", description: "Traps Scored: ");
 
+  AddOrMinus trapsMissed =
+      AddOrMinus(value: "trap_miss", description: "Traps Missed: ");
+  AddOrMinus fouls = AddOrMinus(
+      value: "fouls", description: "Foul points given to other team: ");
+  AddOrMinus cards =
+      AddOrMinus(value: "cards", description: "Card Code Given: ");
+
   checkbox chainFalling =
       checkbox(value: "ChainFalling", description: "Fallen? ");
 
@@ -53,6 +60,10 @@ class _EndGameState extends State<EndGame> {
 
               trap,
               Functions.verticalSpacing(),
+
+              trapsMissed,
+              Functions.verticalSpacing(),
+
               // harmonize two bullets
               harmonizeTwo,
               Functions.verticalSpacing(),
@@ -65,6 +76,11 @@ class _EndGameState extends State<EndGame> {
               notes,
               Functions.verticalSpacing(),
 
+              fouls,
+              Functions.verticalSpacing(),
+
+              cards,
+              Functions.verticalSpacing(),
               // Page Navigation
               backAndForthPages(context, 5),
             ],

@@ -29,6 +29,9 @@ class _TeleopPageState extends State<TeleopPage> {
       AddOrMinus(value: "recouver", description: "Recouvered: ");
   AddOrMinus brokedown = AddOrMinus(value: "broken", description: "Broken: ");
 
+  AddOrMinus timesAmped =
+      AddOrMinus(value: "times_they_were_amped", description: "Times Amped: ");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +49,8 @@ class _TeleopPageState extends State<TeleopPage> {
             ampNotes,
             Functions.verticalSpacing(),
             ampNotesMissed,
+            Functions.verticalSpacing(),
+            timesAmped,
             Functions.verticalSpacing(),
             coopBonus,
             Functions.verticalSpacing(),

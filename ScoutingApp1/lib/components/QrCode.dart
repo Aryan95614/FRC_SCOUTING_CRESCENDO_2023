@@ -19,7 +19,6 @@ class QRCodeWidget extends StatefulWidget {
 }
 
 class _QRCodeWidgetState extends State<QRCodeWidget> {
-  bool _isVisible = false;
   ScreenshotController _screenshotController = ScreenshotController();
   var image;
 
@@ -60,12 +59,12 @@ class _QRCodeWidgetState extends State<QRCodeWidget> {
                 heroTag: "Showing QRCode",
                 onPressed: () {
                   setState(() {
-                    _isVisible = true;
+                    Functions.dataclass.showQRCode = true;
                   });
                 },
                 label: const Text("Show QRCode")),
             Visibility(
-                visible: _isVisible,
+                visible: Functions.dataclass.showQRCode,
                 child: Column(
                   children: [
                     Screenshot(
@@ -90,3 +89,8 @@ class _QRCodeWidgetState extends State<QRCodeWidget> {
     );
   }
 }
+//
+/*
+times amped,
+ Climb fall trap Trap miss, harmonize Foul card
+ */

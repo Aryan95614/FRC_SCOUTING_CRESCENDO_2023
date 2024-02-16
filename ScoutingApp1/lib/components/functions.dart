@@ -9,6 +9,7 @@ import 'dart:io';
 import '../pages/sample.dart';
 
 class Dataclass {
+  bool showQRCode = false;
   Map<String, dynamic> data = {
     // Pregame
     "person_name": "",
@@ -24,6 +25,7 @@ class Dataclass {
     "amp_note_auto_missed": 0,
 
     "moved_during_auto": false,
+    "times_they_were_amped": 0,
 
     // Teleop
 
@@ -41,10 +43,14 @@ class Dataclass {
 
     "climb": false,
     "trap": false,
+    "trap_miss": 0,
     "ChainFalling": false,
     "Harmonizing_Two_Robots": false,
     "Harmonizing_Three_Robots": false,
     "notes": "",
+
+    "fouls": 0,
+    "cards": 0,
   };
 
   static const double widthSeparation = 5.0;
@@ -67,6 +73,7 @@ class Dataclass {
       "amp_note_auto_missed": 0,
 
       "moved_during_auto": false,
+      "times_they_were_amped": 0,
 
       // Teleop
 
@@ -84,10 +91,14 @@ class Dataclass {
 
       "climb": false,
       "trap": false,
+      "trap_miss": 0,
       "ChainFalling": false,
       "Harmonizing_Two_Robots": false,
       "Harmonizing_Three_Robots": false,
       "notes": "",
+
+      "fouls": 0,
+      "cards": 0,
     };
   }
 }
@@ -96,6 +107,8 @@ class Functions {
   // Initialize new Dataclass
   static Dataclass dataclass = Dataclass();
   static String totalString = "";
+
+  //bool showQRCode = false;
 
   void restartDataclass() => dataclass.resetDataclass();
 
@@ -136,6 +149,7 @@ class Functions {
       "speaker_note_missed",
       "amp_note_teleop",
       "amp_note_missed",
+      "times_they_were_amped",
 
       "coop",
       "broken",
@@ -145,15 +159,35 @@ class Functions {
       "climb",
       "ChainFalling",
       "trap",
-      /* TODO: add a trap miss? */
-      // SAM WHERE DO WE ADD HARMONIZE AND NAMES
+      "trap_miss"
+
+      /* TODO: harmonize (0:0, 1:1, 2:2), foul*/
     ]);
+
+    dynamic harmonize = 0;
+    //Harmonizing_Three_Robots
+    if (Functions.dataclass.data["Harmonizing_Two_Robots"]) {
+      harmonize = 1;
+    }
+    if (Functions.dataclass.data["Harmonizing_Three_Robots"]) {
+      harmonize = 2;
+    }
+    totalString = "$totalString${harmonize.toString()}, ";
+
+    // add fouls points to other team
+    totalString =
+        totalString + Functions.dataclass.data["fouls"].toString() + ", ";
+    // add harmonize harmonize (0:0, 1:1, 2:2)
+    totalString =
+        totalString + Functions.dataclass.data["cards"].toString() + ", ";
 
     totalString = "$totalString\n";
 
-    dataclass.resetDataclass();
+    String returnString = totalString;
+    //dataclass.resetDataclass();
+    totalString = "";
 
-    return totalString;
+    return returnString;
   }
 }
 
