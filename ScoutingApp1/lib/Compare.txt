@@ -1,0 +1,54 @@
+
+
+  void getFile(List<List<dynamic>> getInfos) async {
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    File f = new File(dir + "/filename1.csv");
+
+    String csv = const ListToCsvConverter().convert(getInfos);
+    f.writeAsString(csv);
+    print("done");
+  }
+
+  formCsv(String input) async {
+    List<String> splitted = input.split('~');
+    late List<List<dynamic>> totall = [];
+    for (String x in splitted) {
+      List<String> row = x.split(', ');
+      totall.add(row);
+    }
+    String dir =
+        (await getApplicationDocumentsDirectory()).path + "/filename1.csv";
+
+    getFile(totall);
+    Share.shareFiles(['$dir'], text: 'Robotics Csv File');
+  }
+
+  String MatchInfo() {
+    String total = "";
+
+    for (String i in queue) {
+      total = total + i.toString();
+    }
+
+    return total;
+  }
+
+  void refreshSet() {
+    queue = new Set();
+  }
+
+  String SplitforView( String input) {
+    // Basically splits for the viewers
+    String total = "";
+
+    for (int i = 0; i < input.length; i++) {
+      total = input[i]=="~" ? input[i] + "\n": input[i] + i.toString();
+    }
+
+
+    return input;
+  }
+
+  String getInformation() {
+    return SplitforView(MatchInfo());
+  }

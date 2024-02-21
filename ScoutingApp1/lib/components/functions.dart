@@ -9,9 +9,11 @@ import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import '../pages/sample.dart';
+import 'package:csv/csv.dart';
 
 class Dataclass {
   bool showQRCode = false;
+  bool color = true;
 
   Map<String, dynamic> data = {
     // Pregame
@@ -58,7 +60,6 @@ class Dataclass {
 
   static const double widthSeparation = 5.0;
   static const double verticalSeparation = 20.0;
-  String totalString = "";
 
   void resetDataclass() {
     data = {
@@ -118,7 +119,7 @@ class Functions {
     Functions.queue.add(data);
   }
 
-  void restartDataclass() => dataclass.resetDataclass();
+  static void restartDataclass() => dataclass.resetDataclass();
 
   static SizedBox widthSpacing() => const SizedBox(
         width: Dataclass.widthSeparation,
@@ -128,70 +129,90 @@ class Functions {
         height: Dataclass.verticalSeparation,
       );
 
-  static void addToTotalString(List<String> variables) {
-    for (String variable in variables) {
-      if (dataclass.data[variable] == "") {
+  static String returnPartString(String variable) {
+    if (dataclass.data[variable] is String && dataclass.data[variable] == "") {
+      dataclass.data[variable] = "0";
+    } else if (dataclass.data[variable] is bool) {
+      if (dataclass.data[variable]) {
+        dataclass.data[variable] = "1";
+      } else {
         dataclass.data[variable] = "0";
       }
-      totalString = "${totalString + dataclass.data[variable].toString()}, ";
+    } else if (dataclass.data[variable] is int) {
+      if (dataclass.data[variable] == 0) {
+        dataclass.data[variable] = "0";
+      }
     }
+
+    return dataclass.data[variable] + ", ";
+  }
+
+  static String getStringReady() {
+    String rawSpace = "";
+
+    for (String element in queue) {
+      rawSpace = rawSpace + element;
+    }
+
+    return rawSpace;
   }
 
   static String returnTotalDataclass() {
-    // Team Name
-    addToTotalString(<String>[
-      // Pregame
-      "team_name",
-      "match_number",
-      "color",
+    String newString = "";
 
-      // Auto
-      "moved_during_auto",
-      "speaker_note_score",
-      "speaker_note_auto_missed",
-      "amp_note_score",
-      "amp_note_auto_missed",
+    newString += returnPartString("team_name");
+    newString += returnPartString("match_number");
 
-      // Teleop
-      "speaker_note_teleop",
-      "speaker_note_missed",
-      "amp_note_teleop",
-      "amp_note_missed",
-      "times_they_were_amped",
+    newString += Functions.dataclass.color ? "1, " : "0, ";
 
-      "coop",
-      "broken",
-      "recouver",
+    newString += returnPartString("moved_during_auto");
+    newString += returnPartString("speaker_note_score");
+    newString += returnPartString("speaker_note_auto_missed");
+    newString += returnPartString("amp_note_score");
+    newString += returnPartString("amp_note_auto_missed");
 
-      // Endgame
-      "climb",
-      "ChainFalling",
-      "trap",
-      "trap_miss"
+    newString += returnPartString("speaker_note_teleop");
+    newString += returnPartString("speaker_note_missed");
+    newString += returnPartString("amp_note_teleop");
+    newString += returnPartString("amp_note_missed");
+    newString += returnPartString("times_they_were_amped");
 
-      /* TODO: harmonize (0:0, 1:1, 2:2), foul*/
-    ]);
+    newString += returnPartString("coop");
+    newString += returnPartString("broken");
+    newString += returnPartString("recouver");
 
-    dynamic harmonize = 0;
-    //Harmonizing_Three_Robots
-    if (Functions.dataclass.data["Harmonizing_Two_Robots"]) {
-      harmonize = 1;
-    }
+    newString += returnPartString("climb");
+    newString += returnPartString("ChainFalling");
+    newString += returnPartString("trap");
+    newString += returnPartString("trap_miss");
+
     if (Functions.dataclass.data["Harmonizing_Three_Robots"]) {
-      harmonize = 2;
+      newString += "2, ";
+    } else if (Functions.dataclass.data["Harmonizing_Two_Robots"]) {
+      newString += "1, ";
     }
-    totalString = "$totalString${harmonize.toString()}, ";
 
-    // add fouls points to other team
-    addToTotalString(["fouls", "cards", "notes", "person_name"]);
+    newString += returnPartString("fouls");
+    newString += returnPartString("cards");
+    newString += returnPartString("person_name");
+    newString += returnPartString("notes");
 
-    totalString += "~";
-    String returnString = totalString;
-    //dataclass.resetDataclass();
-    totalString = "";
+    newString += "~";
+    // String returnString = newString;
+    // //dataclass.resetDataclass();
+    // totalString = "";
+    //
+    print(newString);
+    return newString;
+  }
 
-    print(returnString);
-    return returnString;
+  static void getFile(List<List<dynamic>> getInfos) async {
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    File f = File("$dir/filename1.csv");
+
+    String csv = const ListToCsvConverter().convert(getInfos);
+    f.writeAsString(csv);
+    print("done");
   }
 }
 

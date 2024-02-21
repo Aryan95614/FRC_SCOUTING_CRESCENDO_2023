@@ -30,6 +30,7 @@ class _PostGamePageState extends State<PostGamePage> {
                 onPressed: () {
                   Functions.totalString = "";
                   Functions.dataclass.showQRCode = false;
+                  Functions.restartDataclass();
 
                   Navigator.pushAndRemoveUntil(
                       context,
