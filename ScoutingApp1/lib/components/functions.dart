@@ -72,6 +72,7 @@ class Dataclass {
   static const double verticalSeparation = 20.0;
 
   void resetDataclass() {
+    color = false;
     showQRCode = false;
     moved_during_auto = false;
     coop_bonus = false;
@@ -178,43 +179,53 @@ class Functions {
   static String returnTotalDataclass() {
     String newString = "";
 
-    newString += returnPartString("team_name");
-    newString += returnPartString("match_number");
+    newString += Functions.dataclass.data["team_name"].toString() + ", ";
+    newString += Functions.dataclass.data["match_number"].toString() + ", ";
 
     newString += Functions.dataclass.color ? "1, " : "0, ";
 
-    newString += changeBool(dataclass.moved_during_auto);
-    newString += returnPartString("speaker_note_score");
-    newString += returnPartString("speaker_note_auto_missed");
-    newString += returnPartString("amp_note_score");
-    newString += returnPartString("amp_note_auto_missed");
+    newString += Functions.dataclass.moved_during_auto ? "1, " : "0, ";
+    newString +=
+        Functions.dataclass.data["speaker_note_score"].toString() + ", ";
+    newString +=
+        Functions.dataclass.data["speaker_note_auto_missed"].toString() + ", ";
+    newString += Functions.dataclass.data["amp_note_score"].toString() + ", ";
+    newString +=
+        Functions.dataclass.data["amp_note_auto_missed"].toString() + ", ";
 
-    newString += returnPartString("speaker_note_teleop");
-    newString += returnPartString("speaker_note_missed");
-    newString += returnPartString("amp_note_teleop");
-    newString += returnPartString("amp_note_missed");
-    newString += returnPartString("times_they_were_amped");
+    newString +=
+        Functions.dataclass.data["speaker_note_teleop"].toString() + ", ";
+    newString +=
+        Functions.dataclass.data["speaker_note_missed"].toString() + ", ";
+    newString += Functions.dataclass.data["amp_note_teleop"].toString() + ", ";
+    newString += Functions.dataclass.data["amp_note_missed"].toString() + ", ";
+    newString +=
+        Functions.dataclass.data["times_they_were_amped"].toString() + ", ";
 
-    newString += changeBool(dataclass.coop_bonus);
-    newString += returnPartString("broken");
-    newString += returnPartString("recouver");
+    newString +=
+        Functions.dataclass.coop_bonus ? "1, ".toString() : "0, ".toString();
+    newString += Functions.dataclass.data["broken"].toString() + ", ";
+    newString += Functions.dataclass.data["recouver"].toString() + ", ";
 
-    newString += changeBool(dataclass.climbed);
-    newString += changeBool(dataclass.chainFalling);
-    newString += changeBool(dataclass.traps);
+    newString += Functions.dataclass.climbed ? "1, " : "0, ";
+    newString += Functions.dataclass.chainFalling ? "1, " : "0, ";
+    newString += Functions.dataclass.traps ? "1, " : "0, ";
 
-    newString += returnPartString("trap_miss");
+    newString += Functions.dataclass.data["trap_miss"].toString() + ", ";
 
     if (Functions.dataclass.harmonize_two) {
-      newString += "2, ";
-    } else if (Functions.dataclass.harmonize_three) {
       newString += "1, ";
+    } else if (Functions.dataclass.harmonize_three) {
+      newString += "2, ";
+    } else {
+      newString += "0, ";
     }
+// climb: 1, fall: 0, trap: 1, trap miss: 15, harmonize: 2, foul: 3, cards:4
+    newString += Functions.dataclass.data["fouls"].toString() + ", ";
+    newString += Functions.dataclass.data["cards"].toString() + ", ";
 
-    newString += returnPartString("fouls");
-    newString += returnPartString("cards");
-    newString += returnPartString("person_name");
-    newString += returnPartString("notes");
+    newString += Functions.dataclass.data["person_name"].toString() + ", ";
+    newString += Functions.dataclass.data["notes"].toString() + ", ";
 
     newString += "~";
 

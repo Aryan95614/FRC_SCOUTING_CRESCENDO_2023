@@ -90,7 +90,7 @@ class _EndGameState extends State<EndGame> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Grouped with one robot?: "),
+                  const Text("Has it harmonized with 1 robots:   "),
                   Checkbox(
                       value: Functions.dataclass.harmonize_two,
                       onChanged: (bool? moved) {
