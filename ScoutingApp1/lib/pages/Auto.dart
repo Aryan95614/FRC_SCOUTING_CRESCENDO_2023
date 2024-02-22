@@ -24,9 +24,6 @@ class _AutoPageState extends State<AutoPage> {
   AddOrMinus ampNoteMissingCollection =
       AddOrMinus(value: "amp_note_auto_missed", description: "Amp Misses?: ");
 
-  checkbox moved =
-      checkbox(value: "moved_during_auto", description: "Moved During Auto?: ");
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,11 +53,39 @@ class _AutoPageState extends State<AutoPage> {
               Functions.verticalSpacing(),
 
               // Has the robot moved ( CheckBox )
-              moved,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Has it moved?  "),
+                  Checkbox(
+                      value: Functions.dataclass.moved_during_auto,
+                      onChanged: (bool? moved) {
+                        setState(() {
+                          Functions.dataclass.moved_during_auto = moved!;
+                        });
+                      }),
+                ],
+              ),
+
               Functions.verticalSpacing(),
 
               // Page Navigation
-              backAndForthPages(context, 3),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, "/PreGamePage");
+                      },
+                      icon: const Icon(Icons.arrow_back_outlined)),
+                  Functions.widthSpacing(),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/TeleopPage");
+                      },
+                      icon: const Icon(Icons.arrow_forward_outlined))
+                ],
+              ),
             ],
           ),
         ),

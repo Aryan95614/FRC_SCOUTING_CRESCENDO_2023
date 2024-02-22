@@ -24,7 +24,6 @@ class _TeleopPageState extends State<TeleopPage> {
   AddOrMinus ampNotesMissed =
       AddOrMinus(value: "amp_note_missed", description: "Amp Notes Missed: ");
 
-  checkbox coopBonus = checkbox(value: "coop", description: "Coop bonus?: ");
   AddOrMinus recouvered =
       AddOrMinus(value: "recouver", description: "Recouvered: ");
   AddOrMinus brokedown = AddOrMinus(value: "broken", description: "Broken: ");
@@ -52,13 +51,39 @@ class _TeleopPageState extends State<TeleopPage> {
             Functions.verticalSpacing(),
             timesAmped,
             Functions.verticalSpacing(),
-            coopBonus,
+
+            // coop bonus
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const Text("Coop Bonus?   "),
+              Checkbox(
+                  value: Functions.dataclass.coop_bonus,
+                  onChanged: (bool? moved) {
+                    setState(() {
+                      Functions.dataclass.coop_bonus = moved!;
+                    });
+                  })
+            ]),
             Functions.verticalSpacing(),
             recouvered,
             Functions.verticalSpacing(),
             brokedown,
             Functions.verticalSpacing(),
-            backAndForthPages(context, 4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/AutoPage");
+                    },
+                    icon: const Icon(Icons.arrow_back_outlined)),
+                Functions.widthSpacing(),
+                IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/EndGamePage");
+                    },
+                    icon: const Icon(Icons.arrow_forward_outlined))
+              ],
+            )
           ],
         ),
       )),

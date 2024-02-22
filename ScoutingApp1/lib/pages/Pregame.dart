@@ -74,7 +74,19 @@ class _PregameState extends State<Pregame> {
               Functions.verticalSpacing(),
 
               // Page Navigation
-              backAndForthPages(context, 2),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/MainPage");
+                    },
+                    icon: const Icon(Icons.arrow_back_outlined)),
+                Functions.widthSpacing(),
+                IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/AutoPage");
+                    },
+                    icon: const Icon(Icons.arrow_forward_outlined))
+              ]),
             ],
           ),
         ));

@@ -15,6 +15,16 @@ class Dataclass {
   bool showQRCode = false;
   bool color = true;
 
+  bool moved_during_auto = false;
+  bool coop_bonus = false;
+
+  bool harmonize_two = false;
+  bool harmonize_three = false;
+
+  bool climbed = false;
+  bool traps = false;
+  bool chainFalling = false;
+
   Map<String, dynamic> data = {
     // Pregame
     "person_name": "",
@@ -62,6 +72,15 @@ class Dataclass {
   static const double verticalSeparation = 20.0;
 
   void resetDataclass() {
+    showQRCode = false;
+    moved_during_auto = false;
+    coop_bonus = false;
+    harmonize_two = false;
+    harmonize_three = false;
+
+    climbed = false;
+    traps = false;
+    chainFalling = false;
     data = {
       // Pregame
       "person_name": "",
@@ -130,21 +149,20 @@ class Functions {
       );
 
   static String returnPartString(String variable) {
-    if (dataclass.data[variable] is String && dataclass.data[variable] == "") {
+    if (dataclass.data[variable] == 0) {
       dataclass.data[variable] = "0";
-    } else if (dataclass.data[variable] is bool) {
-      if (dataclass.data[variable]) {
-        dataclass.data[variable] = "1";
-      } else {
-        dataclass.data[variable] = "0";
-      }
-    } else if (dataclass.data[variable] is int) {
-      if (dataclass.data[variable] == 0) {
-        dataclass.data[variable] = "0";
-      }
     }
+    print(dataclass.data[variable]);
 
-    return dataclass.data[variable] + ", ";
+    return "${dataclass.data[variable]}, ";
+  }
+
+  static changeBool(bool variable) {
+    if (variable) {
+      return "1, ";
+    } else {
+      return "0, ";
+    }
   }
 
   static String getStringReady() {
@@ -165,7 +183,7 @@ class Functions {
 
     newString += Functions.dataclass.color ? "1, " : "0, ";
 
-    newString += returnPartString("moved_during_auto");
+    newString += changeBool(dataclass.moved_during_auto);
     newString += returnPartString("speaker_note_score");
     newString += returnPartString("speaker_note_auto_missed");
     newString += returnPartString("amp_note_score");
@@ -177,18 +195,19 @@ class Functions {
     newString += returnPartString("amp_note_missed");
     newString += returnPartString("times_they_were_amped");
 
-    newString += returnPartString("coop");
+    newString += changeBool(dataclass.coop_bonus);
     newString += returnPartString("broken");
     newString += returnPartString("recouver");
 
-    newString += returnPartString("climb");
-    newString += returnPartString("ChainFalling");
-    newString += returnPartString("trap");
+    newString += changeBool(dataclass.climbed);
+    newString += changeBool(dataclass.chainFalling);
+    newString += changeBool(dataclass.traps);
+
     newString += returnPartString("trap_miss");
 
-    if (Functions.dataclass.data["Harmonizing_Three_Robots"]) {
+    if (Functions.dataclass.harmonize_two) {
       newString += "2, ";
-    } else if (Functions.dataclass.data["Harmonizing_Two_Robots"]) {
+    } else if (Functions.dataclass.harmonize_three) {
       newString += "1, ";
     }
 
@@ -198,10 +217,7 @@ class Functions {
     newString += returnPartString("notes");
 
     newString += "~";
-    // String returnString = newString;
-    // //dataclass.resetDataclass();
-    // totalString = "";
-    //
+
     print(newString);
     return newString;
   }
@@ -218,32 +234,4 @@ class Functions {
 
 void showPage(String pageName, BuildContext context) {
   Navigator.pushNamed(context, pageName);
-}
-
-Row backAndForthPages(BuildContext context, int route) {
-  Map<int, String> possibleRoutes = {
-    1: "MainPage",
-    2: "PreGamePage",
-    3: "AutoPage",
-    4: "TeleopPage",
-    5: "EndGamePage",
-    6: "PostGamePage",
-  };
-
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      IconButton(
-          onPressed: () {
-            Navigator.popAndPushNamed(context, possibleRoutes[route - 1]!);
-          },
-          icon: const Icon(Icons.arrow_back_outlined)),
-      Functions.widthSpacing(),
-      IconButton(
-          onPressed: () {
-            Navigator.pushNamed(context, possibleRoutes[route + 1]!);
-          },
-          icon: const Icon(Icons.arrow_forward_outlined))
-    ],
-  );
 }

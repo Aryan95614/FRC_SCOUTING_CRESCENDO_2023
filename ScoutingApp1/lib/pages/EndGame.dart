@@ -15,25 +15,12 @@ class EndGame extends StatefulWidget {
 }
 
 class _EndGameState extends State<EndGame> {
-  checkbox climbed = checkbox(value: "climb", description: "Climbed?: ");
-  checkbox trap = checkbox(value: "trap", description: "Traps Scored: ");
-
   AddOrMinus trapsMissed =
       AddOrMinus(value: "trap_miss", description: "Traps Missed: ");
   AddOrMinus fouls = AddOrMinus(
       value: "fouls", description: "Foul points given to other team: ");
   AddOrMinus cards =
       AddOrMinus(value: "cards", description: "Card Code Given: ");
-
-  checkbox chainFalling =
-      checkbox(value: "ChainFalling", description: "Fallen? ");
-
-  checkbox harmonizeTwo = checkbox(
-      value: "Harmonizing_Two_Robots",
-      description: "Harmonize with one Robots?: ");
-  checkbox harmonizeThree = checkbox(
-      value: "Harmonizing_Three_Robots",
-      description: "Harmonize with two robots?: ");
 
   textBoxField notes =
       textBoxField(value: 'notes', description: "Robot Info: ");
@@ -51,25 +38,86 @@ class _EndGameState extends State<EndGame> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Speaker Note Score ( + - )
-              climbed,
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                const Text("Did it climb?    "),
+                Checkbox(
+                    value: Functions.dataclass.climbed,
+                    onChanged: (bool? moved) {
+                      setState(() {
+                        Functions.dataclass.climbed = moved!;
+                      });
+                    }),
+              ]),
               Functions.verticalSpacing(),
 
               // Has the robot moved ( CheckBox )
-              chainFalling,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Did it fall?  "),
+                  Checkbox(
+                      value: Functions.dataclass.chainFalling,
+                      onChanged: (bool? moved) {
+                        setState(() {
+                          Functions.dataclass.chainFalling = moved!;
+                        });
+                      }),
+                ],
+              ),
+
               Functions.verticalSpacing(),
 
-              trap,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Did it score a trap?   "),
+                  Checkbox(
+                      value: Functions.dataclass.traps,
+                      onChanged: (bool? moved) {
+                        setState(() {
+                          Functions.dataclass.traps = moved!;
+                        });
+                      }),
+                ],
+              ),
+
               Functions.verticalSpacing(),
 
               trapsMissed,
               Functions.verticalSpacing(),
 
               // harmonize two bullets
-              harmonizeTwo,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Grouped with one robot?: "),
+                  Checkbox(
+                      value: Functions.dataclass.harmonize_two,
+                      onChanged: (bool? moved) {
+                        setState(() {
+                          Functions.dataclass.harmonize_two = moved!;
+                        });
+                      }),
+                ],
+              ),
+
               Functions.verticalSpacing(),
 
               // harmonize three
-              harmonizeThree,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Has it harmonized with 2 robots:   "),
+                  Checkbox(
+                      value: Functions.dataclass.harmonize_three,
+                      onChanged: (bool? moved) {
+                        setState(() {
+                          Functions.dataclass.harmonize_three = moved!;
+                        });
+                      }),
+                ],
+              ),
+
               Functions.verticalSpacing(),
 
               // notes on the robot
@@ -82,7 +130,22 @@ class _EndGameState extends State<EndGame> {
               cards,
               Functions.verticalSpacing(),
               // Page Navigation
-              backAndForthPages(context, 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/TeleopPage");
+                      },
+                      icon: const Icon(Icons.arrow_back_outlined)),
+                  Functions.widthSpacing(),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/PostGamePage");
+                      },
+                      icon: const Icon(Icons.arrow_forward_outlined))
+                ],
+              ),
             ],
           ),
         ),

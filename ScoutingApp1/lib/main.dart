@@ -26,16 +26,16 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(title: 'FRC 4976 Scouting App'),
       routes: {
-        "MainPage": (context) => const MyHomePage(title: "Scouting App"),
-        "PreGamePage": (context) => const Pregame(title: 'Before the Game'),
-        "AutoPage": (context) => const AutoPage(
+        "/MainPage": (context) => const MyHomePage(title: "Scouting App"),
+        "/PreGamePage": (context) => const Pregame(title: 'Before the Game'),
+        "/AutoPage": (context) => const AutoPage(
               title: "Autonomous Period",
             ),
-        "TeleopPage": (context) => const TeleopPage(
+        "/TeleopPage": (context) => const TeleopPage(
               title: "Teleop Period",
             ),
-        "EndGamePage": (context) => const EndGame(title: "EndGame Period"),
-        "PostGamePage": (context) =>
+        "/EndGamePage": (context) => const EndGame(title: "EndGame Period"),
+        "/PostGamePage": (context) =>
             const PostGamePage(title: "PostGame Period"),
         "/Scanner1": (context) => const ScanningPage(title: "Scan Page"),
         "/ScanNav": (context) => const scanPage(title: "Scan Page")
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Functions.verticalSpacing(),
                 FloatingActionButton.extended(
                   heroTag: 'Go to the Auto Page',
-                  onPressed: () => showPage("PreGamePage", context),
+                  onPressed: () => showPage("/PreGamePage", context),
                   label: const Text("Start Scouting"),
                 ),
                 Functions.verticalSpacing(),
