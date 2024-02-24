@@ -19,8 +19,7 @@ class _EndGameState extends State<EndGame> {
       AddOrMinus(value: "trap_miss", description: "Traps Missed: ");
   AddOrMinus fouls = AddOrMinus(
       value: "fouls", description: "Foul points given to other team: ");
-  AddOrMinus cards =
-      AddOrMinus(value: "cards", description: "Card Code Given: ");
+  AddOrMinus cards = AddOrMinus(value: "cards", description: "Card issued: ");
 
   textBoxField notes =
       textBoxField(value: 'notes', description: "Robot Info: ");
@@ -128,6 +127,10 @@ class _EndGameState extends State<EndGame> {
               Functions.verticalSpacing(),
 
               cards,
+              Functions.verticalSpacing(),
+              const Text(
+                  " FYI: The Yellow Card is 1, The Red is 2. Otherwise it is 0."),
+
               Functions.verticalSpacing(),
               // Page Navigation
               Row(

@@ -56,7 +56,7 @@ class _AutoPageState extends State<AutoPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Has it moved?  "),
+                  const Text("Left Starting Zone?  "),
                   Checkbox(
                       value: Functions.dataclass.moved_during_auto,
                       onChanged: (bool? moved) {

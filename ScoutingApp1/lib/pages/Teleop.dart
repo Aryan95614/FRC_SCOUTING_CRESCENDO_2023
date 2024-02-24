@@ -25,7 +25,7 @@ class _TeleopPageState extends State<TeleopPage> {
       AddOrMinus(value: "amp_note_missed", description: "Amp Notes Missed: ");
 
   AddOrMinus recouvered =
-      AddOrMinus(value: "recouver", description: "Recouvered: ");
+      AddOrMinus(value: "recouver", description: "Recovered: ");
   AddOrMinus brokedown = AddOrMinus(value: "broken", description: "Broken: ");
 
   AddOrMinus timesAmped =
