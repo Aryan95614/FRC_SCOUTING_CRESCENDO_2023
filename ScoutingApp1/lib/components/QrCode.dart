@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:scoutingapp1/pages/PostGame.dart';
 import 'package:screenshot/screenshot.dart';
 import './functions.dart';
 import 'package:flutter/rendering.dart';
@@ -60,6 +61,12 @@ class _QRCodeWidgetState extends State<QRCodeWidget> {
                 onPressed: () {
                   setState(() {
                     Functions.dataclass.showQRCode = true;
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const PostGamePage(title: "PostGame Period")),
+                        ModalRoute.withName('/'));
                   });
                 },
                 label: const Text("Show QRCode")),
@@ -80,7 +87,7 @@ class _QRCodeWidgetState extends State<QRCodeWidget> {
                         onPressed: () {
                           _captureAndSaveQRCode();
                         },
-                        child: const Text("Share Code"))
+                        child: const Text("Share Code")),
                   ],
                 ))
           ],

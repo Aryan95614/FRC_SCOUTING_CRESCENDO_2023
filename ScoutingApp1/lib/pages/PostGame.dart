@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:scoutingapp1/components/QrCode.dart';
 import './Pregame.dart';
 import 'package:scoutingapp1/components/AddOrMinus.dart';
 import 'package:scoutingapp1/components/functions.dart';
 import 'package:scoutingapp1/components/Checkbox.dart';
+import 'package:http/http.dart' as http;
 
 class PostGamePage extends StatefulWidget {
   const PostGamePage({Key? key, required this.title}) : super(key: key);
@@ -27,19 +30,14 @@ class _PostGamePageState extends State<PostGamePage> {
           children: [
             FloatingActionButton.extended(
                 heroTag: 'Going to Starting page',
-                onPressed: () {
+                onPressed: () async {
                   Functions.totalString = "";
                   Functions.dataclass.showQRCode = false;
                   Functions.restartDataclass();
-
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              const Pregame(title: "Pregame Page")),
-                      ModalRoute.withName('/'));
                 },
                 label: const Text("Redo Scouting")),
+            Functions.verticalSpacing(),
+            const Text("Remember to Press Redo Scouting"),
             Functions.verticalSpacing(),
             const QRCodeWidget(information: ""),
           ],
