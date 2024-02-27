@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:scoutingapp1/components/functions.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
@@ -52,18 +51,6 @@ class _scanPageState extends State<scanPage> {
     } finally {
       return 1;
     }
-  }
-
-  Future<http.Response> updateAlbum(String title) async {
-    return http.put(
-      Uri.parse('https://jsonplaceholder.typicode.com/albums/1'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'title': Functions.getStringReady(),
-      }),
-    );
   }
 
   @override
