@@ -18,7 +18,7 @@ class scanPage extends StatefulWidget {
 
 class _scanPageState extends State<scanPage> {
   uploadOrShareEmail() async {
-    List<String> splitted = Functions.getStringReady().split('~');
+    List<String> splitted = Functions.getStringReady().split('\n');
     late List<List<dynamic>> totall = [];
     for (String x in splitted) {
       List<String> row = x.split(', ');

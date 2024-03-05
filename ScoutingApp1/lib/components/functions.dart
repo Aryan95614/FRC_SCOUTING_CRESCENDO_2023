@@ -158,7 +158,7 @@ class Functions {
     return "${dataclass.data[variable]}, ";
   }
 
-  static changeBool(bool variable) {
+  static String changeBool(bool variable) {
     if (variable) {
       return "1, ";
     } else {
@@ -179,8 +179,8 @@ class Functions {
   static String returnTotalDataclass() {
     String newString = "";
 
-    newString += Functions.dataclass.data["team_name"].toString() + ", ";
-    newString += Functions.dataclass.data["match_number"].toString() + ", ";
+    newString += dataclass.data["team_name"].toString() + ", ";
+    newString += dataclass.data["match_number"].toString() + ", ";
 
     newString += Functions.dataclass.color ? "1, " : "0, ";
 
@@ -227,7 +227,7 @@ class Functions {
     newString += Functions.dataclass.data["person_name"].toString() + ", ";
     newString += Functions.dataclass.data["notes"].toString() + ", ";
 
-    newString += "~";
+    newString += '\n';
 
     print(newString);
     return newString;

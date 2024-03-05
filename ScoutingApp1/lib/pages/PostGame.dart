@@ -34,6 +34,7 @@ class _PostGamePageState extends State<PostGamePage> {
                   Functions.totalString = "";
                   Functions.dataclass.showQRCode = false;
                   Functions.restartDataclass();
+                  Navigator.pushNamed(context, "/MainPage");
                 },
                 label: const Text("Redo Scouting")),
             Functions.verticalSpacing(),
